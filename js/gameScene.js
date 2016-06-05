@@ -5,6 +5,7 @@
 	    },
 	    count: 0,
 	    timer: null,
+	    packCount: 8,
 	    start: function(properties) {
 	    	var stage = this.getStage();
 	    	var $winWidth = stage.width,
@@ -38,6 +39,7 @@
 				image: 'images/zongzi.png',
 				rect: [0, 0, 55, 56]
 			});
+			// 随机
 			if(~~(Math.random() * 10) % 3 == 0) {
 				bird.drawable.rect = [0, 56, 55, 56];
 				bird.isPack = true;

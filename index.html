@@ -33,6 +33,7 @@
 		<div class="pack-panel">
 			<span class="pack"></span>
 			<span class="multiplication"></span>
+			<span class="" id="pack-count">0</span>
 		</div>
 		<div class="light-box">
 			<span class="title"></span>
@@ -98,7 +99,7 @@ $(function() {
 	ticker.addTick(stage);
 	ticker.start();
 	ticker.addTick(Hilo.Tween);
-
+	// 下载队列
 	var queue = new Hilo.LoadQueue();
 	queue.maxConnections = 3; //设置同时下载的最大连接数，默认为2
 	queue.add([
@@ -123,74 +124,12 @@ $(function() {
 	});
 	queue.start();
 
-	var RuleBox = Hilo.Class.create({
-		Extends: Hilo.Container,
-		constructor: function(properties) {
-			RuleBox.superclass.constructor.call(this, properties);
-			this.init(properties);
-		},
-		init: function(properties) {
-			
-			// var startBtn = new Hilo.Bitmap({
-			// 	image: 'images/start-btn.png',
-			// 	rect: [0, 0, 116, 40],
-			// 	x: 47,
-			// 	y: 74
-			// });
-
-			// this.addChild(startBtn);
-			// // 点击
-			// startBtn.on(Hilo.event.POINTER_START, function(e) {
-			// 	// 隐藏开始场景
-			// 	readyScene.visible = false;
-			// 	$('.light-box').show();
-			// 	var gameScene = new GameScene().addTo(stage);
-			// 	gameScene.start();
-
-			// });
-
-			// var ruleBtn = new Hilo.Bitmap({
-			// 	image: 'images/rule-btn.png',
-			// 	rect: [0, 0, 80, 28],
-			// 	x: 186,
-			// 	y: 81
-			// })
-
-			// // 点击
-			// ruleBtn.on(Hilo.event.POINTER_START, function(e) {
-			// 	$('.rule-dialog').show();
-			// });
-
-			// this.addChild(ruleBtn);
-		}
-	});
-
-	/**
-	 * 开始页面
-	 */
-	var ReadyScene = Hilo.Class.create({
-		Extends: Hilo.Container,
-		constructor: function(properties){
-			ReadyScene.superclass.constructor.call(this, properties);
-		},
-		init: function(properties) {
-			var stage = this.getStage();
-			var ruleBox = new RuleBox({
-				x: 35,
-				y: stage.height - 146 - 63
-			});
-			this.addChild(ruleBox);
-		}
-	});
-
-	var readyScene = new ReadyScene().addTo(stage);
-	readyScene.init();
 
 	$startBtn.on('click', function() {
 		$startDetail.hide();
 		$gameDetail.show();
 		$('#game-bg').show();
-		readyScene.visible = false;
+		// readyScene.visible = false;
 		var gameScene = new GameScene().addTo(stage);
 		gameScene.start();
 
