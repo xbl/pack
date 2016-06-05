@@ -76,8 +76,13 @@
 			差一点，就进前5名了！<br>
 			青年再战一局，敢不敢？
 		</div>
-		<div class="bottom">
-			<a href="javascript:void(0)" class="play-again"></a>
+		<div class="btn-group">
+			<a href="javascript:void(0)" class="play-again">再战一次</a>
+			<a href="javascript:void(0)" class="share-btn">分享朋友圈</a>
+		</div>
+		<div class="form">
+			<input type="text" id="phone" placeholder="请输入手机号">
+			<button class="submit" id="submit"></button>
 		</div>
 	</div>
 </div>
@@ -97,7 +102,9 @@ $(function() {
 		$startDetail = $('.start-detail'),
 		$gameDetail = $('.game-detail'),
 		$playAgain = $('.play-again'),
-		$gameOverDialog = $('.game-over-dialog');
+		$gameOverDialog = $('.game-over-dialog'),
+		$submit = $('#submit'),
+		$phone = $('#phone');
 
 	var stage = new Hilo.Stage({
 		renderType: 'canvas',
@@ -149,8 +156,10 @@ $(function() {
 		$gameOverDialog.hide();
 		gameScene.start();
 	}
-
+	// 开始游戏
 	$startBtn.on('click', startGame);
+	// 重玩
+	$playAgain.on('click', startGame);
 
 	$ruleBtn.on('click', function() {
 		$('.rule-dialog').show();
@@ -160,7 +169,15 @@ $(function() {
 		$('.rule-dialog').hide();
 	});
 
-	$playAgain.on('click', startGame);
+
+	$submit.on('click', function() {
+		console.log($phone.val());
+		alert('提交成功！');
+		$phone.val('');
+		$gameOverDialog.hide();
+		$startDetail.show();
+		$gameDetail.hide();
+	});
 
 	// $(document).on('touchstart', function(event) {
 	// 	event.preventDefault();
