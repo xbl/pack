@@ -1,0 +1,22 @@
+html,body{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+.rain-page{
+	width: 100%;
+	min-height:100%;
+	position: relative;
+	overflow: hidden;
+}
+.game-bg{ background: url(../images/game-bg.png) no-repeat; background-size: 100; position: absolute; top: 0 ; left: 0; right: 0; bottom: 0; }
+.game-over{ background: url(../images/bg_redrain2.png) no-repeat; }
+.pack{ width: 80px; height: 90px; position: absolute; top: 0; right: 0; background: red url(../images/icon-package.png) no-repeat 0px -1px; background-size: 155px 215px; 
+	-webkit-perspective: 1000;
+	// -webkit-transform: rotateY(180deg);
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform-origin: center;
+}

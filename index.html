@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/game.css">
+</head>
+
+<body>
+<div class="loading-view view">
+	<a class="logo" href="javascript:void(0)"></a>
+	<div class="loading-bar">
+		<p id="bar"></p>
+	</div>
+</div>
+<div class="start-view view">
+	<div class="start-detail">
+		<div class="big-zongzi"></div>
+		<div class="rule-box">
+			这是一场眼力与速度的考验，你敢接受这份挑战吗？
+	如果你的眼力够准，速度够快，200元的京东卡就能
+	轻松拿到手！“粽’享端午，赶紧点粽子来吧！
+			<div class="button-group">
+				<a href="javascript:void(0)" class="start-btn"></a>
+				<a href="javascript:void(0)" class="rule-btn"></a>
+			</div>
+			<p>活动时间：6月9日-6月12日每天中午12点准时开场</p>
+		</div>
+	</div>
+	<div class="light-box">
+		<span class="title"></span>
+		<ul>
+			<li><img src="images/tianchuang.png"></li>
+			<li><img src="images/tianchuang.png"></li>
+			<li><img src="images/tianchuang.png"></li>
+			<li><img src="images/tianchuang.png"></li>
+			<li><img src="images/tianchuang.png"></li>
+			<li><img src="images/tianchuang.png"></li>
+			<li><img src="images/tianchuang.png"></li>
+			<li><img src="images/tianchuang.png"></li>
+		</ul>
+	</div>
+	<div id="game-bg"></div>
+</div>
+<!-- <div id="game-bg"></div> -->
+<div class="rule-dialog">
+	<div class="rule-dialog-box">
+		<a href="javascript:void(0)" class="close" id="dialog-close"></a>
+		<span class="title"></span>
+		<ul>
+			<li>1、关注汉腾汽车微信公众号，即可参与活动。</li>
+			<li>2、点击带有汉腾汽车LOGO的粽子，<i>以最短
+时间集齐“汉腾汽车·粽享端午”8个字，点亮
+下方8个车部件的5名朋友，即可每人获得200元
+京东卡一张！</i></li>
+			<li>3、带有汉腾汽车LOGO的粽子，分三种
+<i>（现金红包、空、写字）</i>，均为随机发放。</li>
+			<li>4、每人每天有<i>2次</i>的参与机会。转发一位好友或
+分享朋友圈，均可获得<i>1次</i>机会。
+</li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript" src="js/hilo-standalone.min.js"></script>
+<script type="text/javascript" src="js/zepto.min.js" ></script>
+<script type="text/javascript" src="js/gameScene.js"></script>
+<script>
+$(function() {
+	var $winHeight = $(window).height(),
+		$winWidth = $(window).width(),
+		$bar = $('#bar'),
+		$loadingView = $('.loading-view'),
+		$startView = $('.start-view'),
+		$startBtn = $('.start-btn'),
+		$ruleBtn = $('.rule-btn'),
+		$startDetail = $('.start-detail'),
+		$lightBox = $('.light-box');
+
+	var stage = new Hilo.Stage({
+		renderType: 'canvas',
+		container: document.getElementById('game-bg'),
+		// width: 375,
+		// height: 667
+		width: $winWidth,
+		height: $winHeight
+	});
+	stage.enableDOMEvent(Hilo.event.POINTER_START, true);
+
+	var ticker = new Hilo.Ticker(60);
+	ticker.addTick(stage);
+	ticker.start();
+	ticker.addTick(Hilo.Tween);
+
+	var queue = new Hilo.LoadQueue();
+	queue.maxConnections = 3; //设置同时下载的最大连接数，默认为2
+	queue.add([
+		{id:'startBg', size: 107, src:'images/start-bg.jpg'},
+		{id:'startBtn', size: 6, src:'images/start-btn.png'},
+		{id:'ruleBtn', size: 5, src:'images/rule-btn.png'},
+		{id:'ruleBoxBtn', size: 8, src:'images/rule-box-bg.png'},
+		{id:'gameBg', size: 8, src:'images/game-bg.jpg'},
+	]);
+	queue.on('load', function(e) {
+		//console.log('load:', e.detail);
+		$bar.width(queue.getLoaded() / queue.getTotal() * 100 + '%');
+	});
+	queue.on('complete', function(e){
+		$loadingView.hide();
+		$startView.show();
+	});
+	queue.start();
+
+	var RuleBox = Hilo.Class.create({
+		Extends: Hilo.Container,
+		constructor: function(properties) {
+			RuleBox.superclass.constructor.call(this, properties);
+			this.init(properties);
+		},
+		init: function(properties) {
+			
+			// var startBtn = new Hilo.Bitmap({
+			// 	image: 'images/start-btn.png',
+			// 	rect: [0, 0, 116, 40],
+			// 	x: 47,
+			// 	y: 74
+			// });
+
+			// this.addChild(startBtn);
+			// // 点击
+			// startBtn.on(Hilo.event.POINTER_START, function(e) {
+			// 	// 隐藏开始场景
+			// 	readyScene.visible = false;
+			// 	$('.light-box').show();
+			// 	var gameScene = new GameScene().addTo(stage);
+			// 	gameScene.start();
+
+			// });
+
+			// var ruleBtn = new Hilo.Bitmap({
+			// 	image: 'images/rule-btn.png',
+			// 	rect: [0, 0, 80, 28],
+			// 	x: 186,
+			// 	y: 81
+			// })
+
+			// // 点击
+			// ruleBtn.on(Hilo.event.POINTER_START, function(e) {
+			// 	$('.rule-dialog').show();
+			// });
+
+			// this.addChild(ruleBtn);
+		}
+	});
+
+	/**
+	 * 开始页面
+	 */
+	var ReadyScene = Hilo.Class.create({
+		Extends: Hilo.Container,
+		constructor: function(properties){
+			ReadyScene.superclass.constructor.call(this, properties);
+		},
+		init: function(properties) {
+			var stage = this.getStage();
+			var ruleBox = new RuleBox({
+				x: 35,
+				y: stage.height - 146 - 63
+			});
+			this.addChild(ruleBox);
+		}
+	});
+
+	var readyScene = new ReadyScene().addTo(stage);
+	readyScene.init();
+
+	$startBtn.on('click', function() {
+		$startDetail.hide();
+		$lightBox.show();
+		$('#game-bg').show();
+		readyScene.visible = false;
+		var gameScene = new GameScene().addTo(stage);
+		gameScene.start();
+
+	});
+
+	$ruleBtn.on('click', function() {
+		$('.rule-dialog').show();
+	});
+
+	$('#dialog-close').on('click', function() {
+		$('.rule-dialog').hide();
+	});
+
+	// $(document).on('touchstart', function(event) {
+	// 	event.preventDefault();
+	// });
+	// document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+});
+</script>
+</body>
+</html>

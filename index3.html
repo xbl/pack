@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="css/rain.css" />
+<script type="text/javascript" src="js/jquery.min.js" ></script>
+<title></title>
+</head>
+<script>
+$(function() {
+	// var beginTime = performance.now();
+	var $gameBg = $('.game-bg'),
+		$winHeight = $(window).height() + 20,
+		$winWidth = $(window).width(),
+		second = 5;
+	var createPack = function() {
+		[1, 2].forEach(function() {
+			// 
+			var $pack = $('<span class="pack" />');
+			var right = - ~~( Math.random() * $winWidth - Math.random() * 30)
+			var top = ~~( Math.random() * 30 - Math.random() * 200);
+			// ease-in-out
+			$pack.css({'-webkit-transition': '-webkit-transform ' + second + 's ease-in-out', '-webkit-transform': 'translate(' + right + 'px, ' + top + 'px) scale(1)'});
+			$pack.prependTo($gameBg);
+
+			setTimeout(function() {
+				$pack.css({ '-webkit-transform': 'translate(' + (right - Math.random() * $winWidth) + 'px, ' + $winHeight + 'px) scale(1)' });
+			}, 50);
+			setTimeout(function() {
+				$pack.remove();
+			}, second * 1000);
+		});
+	};
+	createPack();
+	var timer = setInterval(createPack, 800);
+	var a = 0;
+	// 点击红包
+	$(document).on('touchend', '.pack', function(event) {
+		// event.stopPropagation();
+		var $this = $(this);
+		$this.css('background-position', '0 -100px');
+		setTimeout(function() {
+			$this.remove();
+		}, 200);
+		a++;
+		if(a == 5) {
+		// 	$(".chuai_box").show();
+		// 	clearInterval(timer);
+		// 	$gameBg.empty();
+		// 	$gameBg.addClass("game-over");
+			// var endTime = performance.now();
+			// console.log(~~((endTime - beginTime) / 1000));
+		}
+	});
+
+	$(document).on('touchstart', function(event) {
+		event.preventDefault();
+	});
+});
+</script>
+<body>
+<div class="rain-page">
+	<div class="game-bg"></div>
+	<!--蒙层-->
+	<div class="chuai_box" style="display: none;">
+		<div class="chuai">
+			<p>你丫中奖了</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>
