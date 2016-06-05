@@ -24,7 +24,11 @@ text-align: center;*/
 .start-view .big-zongzi{ background: url('../images/big-zongzi.png') no-repeat; width: 220px; height: 310px; margin: 0 auto; height: 310px; background-size: 100%; margin-top: 47px; }
 
 
-.start-view .light-box{ background: rgba(48, 74, 100, 0.89); border: #5e86a4 solid 1px; width: 258px; height: 175px; border-radius: 5px; position: absolute; bottom: 35px; left: 50%; margin-left: -129px; z-index: 1; display: none; }
+.start-view .game-detail{ display: none; }
+.start-view .pack-panel{ background: url('../images/pack-panel.png') no-repeat; width: 96px; height: 63px; line-height: 63px; position: absolute; height: 63px; right: 10px; top: 118px;  }
+.start-view .pack-panel .pack{ background: url('../images/pack.png') no-repeat; width: 29px; height: 35px; display: inline-block; height: 35px; vertical-align: middle; }
+.start-view .pack-panel .multiplication{ background: url('../images/multiplication.png') no-repeat; width: 20px; height: 19px; display: inline-block; height: 19px; vertical-align: middle; }
+.start-view .light-box{ background: rgba(48, 74, 100, 0.89); border: #5e86a4 solid 1px; width: 258px; height: 175px; border-radius: 5px; position: absolute; bottom: 35px; left: 50%; margin-left: -129px; z-index: 1; }
 .start-view .light-box .title{ background: url('../images/light-box-title.png') no-repeat; width: 116px; height: 40px; display: block; position: relative; margin: 0 auto; top: -22px; }
 .start-view .light-box ul{ }
 .start-view .light-box li{ background: url('../images/icon-bg.png') no-repeat 0 0; width: 50px; height: 56px; line-height: 56px; float: left; margin: 0 7px 8px; position: relative; -webkit-filter: grayscale(1); }
