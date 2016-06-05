@@ -95,7 +95,7 @@
 							offset = $target.offset();
 						_this.count++;
 						// 动画结束
-						var teen = Hilo.Tween.to(textIcon, { x: offset.left, y: offset.top }, { duration: 1000, onComplete: function() {
+						var teen = Hilo.Tween.to(textIcon, { x: offset.left, y: offset.top }, { duration: 1000, ease: Ease.Quart, onComplete: function() {
 							_this.removeChild(textIcon);
 							$target.addClass('active');
 
