@@ -49,6 +49,7 @@
 			</ul>
 		</div>
 	</div>
+	
 	<div id="game-bg"></div>
 </div>
 <!-- <div id="game-bg"></div> -->
@@ -58,18 +59,29 @@
 		<span class="title"></span>
 		<ul>
 			<li>1、关注汉腾汽车微信公众号，即可参与活动。</li>
-			<li>2、点击带有汉腾汽车LOGO的粽子，<i>以最短
-时间集齐“汉腾汽车·粽享端午”8个字，点亮
-下方8个车部件的5名朋友，即可每人获得200元
-京东卡一张！</i></li>
-			<li>3、带有汉腾汽车LOGO的粽子，分三种
-<i>（现金红包、空、写字）</i>，均为随机发放。</li>
-			<li>4、每人每天有<i>2次</i>的参与机会。转发一位好友或
-分享朋友圈，均可获得<i>1次</i>机会。
-</li>
+			<li>2、点击带有汉腾汽车LOGO的粽子，<i>以最短时间集齐“汉腾汽车·粽享端午”8个字，点亮下方8个车部件的5名朋友，即可每人获得200元京东卡一张！</i></li>
+			<li>3、带有汉腾汽车LOGO的粽子，分三种<i>（现金红包、空、写字）</i>，均为随机发放。</li>
+			<li>4、每人每天有<i>2次</i>的参与机会。转发一位好友或分享朋友圈，均可获得<i>1次</i>机会。</li>
 		</ul>
 	</div>
 </div>
+
+<div class="game-over-dialog">
+	<div class="game-over-box">
+		<span class="title"></span>
+		<h3>
+			第<span>11</span>名
+		</h3>
+		<div class="game-over-tip">
+			差一点，就进前5名了！<br>
+			青年再战一局，敢不敢？
+		</div>
+		<div class="bottom">
+			<a href="javascript:void(0)" class="play-again"></a>
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript" src="js/hilo-standalone.min.js"></script>
 <script type="text/javascript" src="js/zepto.min.js" ></script>
 <script type="text/javascript" src="js/gameScene.js"></script>
@@ -83,7 +95,9 @@ $(function() {
 		$startBtn = $('.start-btn'),
 		$ruleBtn = $('.rule-btn'),
 		$startDetail = $('.start-detail'),
-		$gameDetail = $('.game-detail');
+		$gameDetail = $('.game-detail'),
+		$playAgain = $('.play-again'),
+		$gameOverDialog = $('.game-over-dialog');
 
 	var stage = new Hilo.Stage({
 		renderType: 'canvas',
@@ -113,6 +127,8 @@ $(function() {
 		{id:'packPanel', size: 89, src:'images/pack-panel.png'},
 		{id:'pack', size: 3, src:'images/pack.png'},
 		{id:'multiplication', size: 2, src:'images/multiplication.png'},
+		{id:'rankTitle', size: 2, src:'images/rank-title.png'},
+		{id:'playAgain', size: 2, src:'images/play-again.png'},
 	]);
 	queue.on('load', function(e) {
 		//console.log('load:', e.detail);
@@ -123,17 +139,18 @@ $(function() {
 		$startView.show();
 	});
 	queue.start();
+	
+	var gameScene = new GameScene().addTo(stage);
 
-
-	$startBtn.on('click', function() {
+	var startGame = function() {
 		$startDetail.hide();
 		$gameDetail.show();
 		$('#game-bg').show();
-		// readyScene.visible = false;
-		var gameScene = new GameScene().addTo(stage);
+		$gameOverDialog.hide();
 		gameScene.start();
+	}
 
-	});
+	$startBtn.on('click', startGame);
 
 	$ruleBtn.on('click', function() {
 		$('.rule-dialog').show();
@@ -142,6 +159,8 @@ $(function() {
 	$('#dialog-close').on('click', function() {
 		$('.rule-dialog').hide();
 	});
+
+	$playAgain.on('click', startGame);
 
 	// $(document).on('touchstart', function(event) {
 	// 	event.preventDefault();

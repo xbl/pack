@@ -11,14 +11,11 @@
 	    	var $winWidth = stage.width,
 	    		$winHeight = stage.height;
 
-			var countText = new Hilo.Text({ color: '#000', text: this.count });
-			countText.x = $winWidth - 20;
-			countText.y = 50;
-			this.addChild(countText);
-
 			var slogan = ['汉', '腾', '汽', '车', '粽', '享', '端', '午'];
 			
-			var $liArr = $('.light-box li');
+			var $liArr = $('.light-box li'),
+				$packCount = $('#pack-count');
+			$packCount.text(0);
 			var _this = this;
 			var createPack = function() {
 				[1, 1,1,1].forEach(function() {
@@ -62,24 +59,10 @@
 				bird.drawable.rect = [0, 114, 55, 56];
 
 				if(bird.isIcon) {
+					setTimeout(function() {
+						_this.removeChild(bird);
+					}, 300);
 					if(_this.count < 8) {
-						// var fontIcon = new Container({
-
-						// });
-						// var textIcon = new Hilo.Text({
-						// 	text: '汗',
-						// 	textAlign: 'center',
-						// 	textVAlign: 'middle',
-						// 	textWidth: 55,
-						// 	textHeight: 56,
-						// 	background: 'red',
-						// 	x: bird.x,
-						// 	y: bird.y
-						// });
-						// textIcon.rotation = 30;
-						// textIcon.setFont('font-size: 14px;');
-						// 
-						
 						var node = $('<div class="text-icon" />').text(slogan[_this.count]);
 						var textIcon = new Hilo.DOMElement({
 							element: node[0],
@@ -106,6 +89,7 @@
 								_this.count = 0;
 								// 
 								$(document).off('touchstart');
+								$('.game-over-dialog').show();
 							}
 						}});
 					}

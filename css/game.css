@@ -1,4 +1,3 @@
-// html{ height: 100%; }
 body{ overflow: hidden; background: #000;  }
 body, p, ul{ margin: 0; padding: 0; font: 12px/1.231 normal;}
 ul{ font-size: 12px; line-height: 16px; }
@@ -9,16 +8,14 @@ li{ list-style: none; }
 .loading-bar{ width: 215px; height: 17px; border: #62768a solid 1px; background: #00163f; border-radius: 5px; box-sizing: border-box; margin: 0 auto; position: relative; top: 45%; }
 .loading-bar p{ background: url('../images/loading-bar.png'); width: 0%; height: 13px; border: #12161d solid 1px; border-radius: 5px; position: relative; -webkit-transition: width 0.4s ease-in-out; }
 .loading-bar p:after{ content: ""; position: absolute; right: -30px; width: 37px; height: 20px; background: url('../images/loading-car.png') no-repeat; }
-/* background: url('../images/start-bg.jpg') no-repeat center; background-size: auto 100%;
-position: relative; height: 100%;
-text-align: center;*/
+
 .start-view{ display: none; text-align: center; background: url('../images/game-bg.jpg') no-repeat center; background-size: auto 100%; }
 .start-view .response{ height: 100%; margin: 0 auto; display: inline-block; position: relative; }
 .start-view .response img{ height: 100%; }
 .start-view .box{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
 .start-view .rule-box{ background: rgba(48, 74, 100, 0.89); border: #5e86a4 solid 1px; width: 258px; height: 165px; border-radius: 5px; position: absolute; bottom: 35px; left: 50%; margin-left: -129px; z-index: 1; box-sizing: border-box; padding: 10px; text-align: left; font-size: 14px; }
 .start-view .rule-box .button-group{ padding: 10px 0 5px; overflow: hidden; text-align: center; line-height: 34px; }
-.start-view .rule-box .start-btn{ background: url('../images/start-btn.png') no-repeat; background-size: 100%; width: 100px; height: 40px; display: inline-block; height: 34px; margin-right: 23px; vertical-align: middle; }
+.start-view .rule-box .start-btn{ background: url('../images/start-btn.png') no-repeat; background-size: 100%; width: 100px; display: inline-block; height: 34px; margin-right: 23px; vertical-align: middle; }
 .start-view .rule-box .rule-btn{ background: url('../images/rule-btn.png') no-repeat; width: 80px; height: 28px!important; display: inline-block; vertical-align: middle; }
 .start-view .rule-box p{ -webkit-transform: scale(0.9); white-space: nowrap; -webkit-transform-origin: left; }
 .start-view .big-zongzi{ background: url('../images/big-zongzi.png') no-repeat; width: 220px; height: 310px; margin: 0 auto; height: 310px; background-size: 100%; margin-top: 47px; }
@@ -38,11 +35,21 @@ text-align: center;*/
 .start-view .light-box li.active:before{ display: none; }
 .start-view .light-box li img{ width: 44px; height: 48px; vertical-align: middle; }
 #game-bg{ text-align: left; display: none; }
-// canvas{ position: relative!important; height: 100%; margin: 0 auto; display: none; }
 
-.rule-dialog{ position: absolute; top: 0; height: 100%; width: 100%; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.75); display: none; z-index: 5; }
+
+.rule-dialog, .game-over-dialog{ position: absolute; top: 0; height: 100%; width: 100%; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.75); display: none; z-index: 5; }
 .rule-dialog .rule-dialog-box{ background: url('../images/rule-dialog-bg.png') no-repeat; width: 290px; height: 240px; position: relative; top: 30%; margin: 0 auto; }
 .rule-dialog .rule-dialog-box .title{ background: url('../images/rule-dialog-title.png') no-repeat; width: 115px; height: 39px; margin: 0 auto; position: relative; top: -20px; display: block; }
 .rule-dialog .rule-dialog-box li{ margin-bottom: 10px; margin-left: 10px; }
 .rule-dialog .rule-dialog-box li i{ color: #fff; font-style: normal; }
 .rule-dialog .rule-dialog-box .close{ background: url('../images/close.png') no-repeat; width: 26px; height: 29px; display: inline-block; position: absolute; right: -8px; top: -8px; }
+
+
+.game-over-dialog{ }
+.game-over-dialog .game-over-box{ background: rgba(48, 74, 100, 0.89); border: #5e86a4 solid 1px; border-radius: 5px; width: 290px; height: 240px; position: relative; top: 30%; margin: 0 auto; }
+.game-over-dialog .game-over-box .title{ background: url('../images/rank-title.png') no-repeat; width: 115px; height: 40px; display: block; height: 40px; margin: 0 auto; position: relative; top: -14px; }
+.game-over-dialog .game-over-box .bottom{ position: absolute; bottom: 20px; left: 0; width: 100%; text-align: center; }
+.game-over-dialog .game-over-box .play-again{ background: url('../images/play-again.png') no-repeat; width: 170px; height: 34px; display: inline-block; }
+.game-over-dialog .game-over-box h3{ font-size: 28px; text-align: center; color: #fff; margin: 15px auto 10px; text-shadow: 2px 0 0 #3a230a, -2px 0 0 #3a230a, 0 2px 0 #3a230a, 0 -2px 0 #3a230a, 1px 1px #3a230a, -1px -1px 0 #3a230a, 1px -1px 0 #3a230a, -1px 1px 0 #3a230a;}
+.game-over-dialog .game-over-box h3 span{ font-size: 45px; margin: 0 5px; }
+.game-over-dialog .game-over-box .game-over-tip{ background: #0e2431; border: #4084ab solid 1px; width: 185px; height: 54px; margin: 0 auto; color: #fff; text-align: center; line-height: 22px; box-sizing: border-box; padding-top: 5px; }
