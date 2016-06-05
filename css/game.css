@@ -25,6 +25,7 @@ text-align: center;*/
 
 
 .start-view .game-detail{ display: none; }
+.text-icon{ font-size: 16px; background: #0e2431; border: #4084ab solid 2px; color: #fff; font-weight: bold; width: 20px; height: 24px; line-height: 24px; display: inline-block; text-align: center; }
 .start-view .pack-panel{ background: url('../images/pack-panel.png') no-repeat; width: 96px; height: 63px; line-height: 63px; position: absolute; height: 63px; right: 10px; top: 118px;  }
 .start-view .pack-panel .pack{ background: url('../images/pack.png') no-repeat; width: 29px; height: 35px; display: inline-block; height: 35px; vertical-align: middle; }
 .start-view .pack-panel .multiplication{ background: url('../images/multiplication.png') no-repeat; width: 20px; height: 19px; display: inline-block; height: 19px; vertical-align: middle; }
