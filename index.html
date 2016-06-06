@@ -17,6 +17,7 @@
 </div>
 <div class="start-view view">
 	<div class="start-detail">
+		<a class="logo" href="javascript:void(0)"></a>
 		<div class="big-zongzi"></div>
 		<div class="rule-box">
 			这是一场眼力与速度的考验，你敢接受这份挑战吗？
@@ -32,8 +33,8 @@
 	<div class="game-detail">
 		<div class="pack-panel">
 			<span class="pack"></span>
-			<span class="multiplication"></span>
-			<span class="" id="pack-count">0</span>
+			<span class="pack-count" id="pack-count">0</span>
+			元			
 		</div>
 		<div class="light-box">
 			<span class="title"></span>
@@ -49,7 +50,7 @@
 			</ul>
 		</div>
 	</div>
-	
+	<div class="bottom-bg"></div>
 	<div id="game-bg"></div>
 </div>
 <!-- <div id="game-bg"></div> -->
@@ -67,12 +68,17 @@
 </div>
 
 <div class="game-over-dialog">
+	<div class="big-car"></div>
 	<div class="game-over-box">
 		<span class="title"></span>
 		<h3>
-			第<span>11</span>名
+			第<span id="rank-number">11</span>名
 		</h3>
-		<div class="game-over-tip">
+		<div class="game-over-tip" id="then1">
+			恭喜您完成挑战，共耗时<span id="useTime"></span>时间。<br>
+			但是不要骄傲哦，排名只是暂时的！
+		</div>
+		<div class="game-over-tip" id="then5">
 			差一点，就进前5名了！<br>
 			青年再战一局，敢不敢？
 		</div>
@@ -81,7 +87,7 @@
 			<a href="javascript:void(0)" class="share-btn">分享朋友圈</a>
 		</div>
 		<div class="form">
-			<input type="text" id="phone" placeholder="请输入手机号">
+			<input type="text" id="phone" placeholder="输入手机号领取奖励">
 			<button class="submit" id="submit"></button>
 		</div>
 	</div>
@@ -124,18 +130,17 @@ $(function() {
 	var queue = new Hilo.LoadQueue();
 	queue.maxConnections = 3; //设置同时下载的最大连接数，默认为2
 	queue.add([
-		{id:'startBg', size: 107, src:'images/start-bg.jpg'},
-		{id:'startBtn', size: 6, src:'images/start-btn.png'},
-		{id:'ruleBtn', size: 5, src:'images/rule-btn.png'},
+		{id:'gameBg', size: 48, src:'images/game-bg.jpg'},
+		{id:'startBtn', size: 9, src:'images/start-btn.png'},
+		{id:'ruleBtn', size: 8, src:'images/rule-btn.png'},
 		{id:'ruleBoxBtn', size: 8, src:'images/rule-box-bg.png'},
-		{id:'gameBg', size: 8, src:'images/game-bg.jpg'},
 		{id:'bigZongzi', size: 89, src:'images/big-zongzi.png'},
-		{id:'iconBg', size: 89, src:'images/icon-bg.png'},
 		{id:'packPanel', size: 89, src:'images/pack-panel.png'},
 		{id:'pack', size: 3, src:'images/pack.png'},
-		{id:'multiplication', size: 2, src:'images/multiplication.png'},
 		{id:'rankTitle', size: 2, src:'images/rank-title.png'},
 		{id:'playAgain', size: 2, src:'images/play-again.png'},
+		{id:'zongzi', size: 2, src:'images/zongzi.png'},
+		{id:'bigCar', size: 148, src:'./images/big-car.png'},
 	]);
 	queue.on('load', function(e) {
 		//console.log('load:', e.detail);
@@ -169,20 +174,30 @@ $(function() {
 		$('.rule-dialog').hide();
 	});
 
-
+	// 提交成绩
 	$submit.on('click', function() {
-		console.log($phone.val());
-		alert('提交成功！');
-		$phone.val('');
-		$gameOverDialog.hide();
-		$startDetail.show();
-		$gameDetail.hide();
+		var phone = $phone.val(),
+			useTime = gameScene.useTime,
+			money = 0.5;
+		if(phone.length > 11) {
+			return alert('请输入正确手机号！');
+		}
+		if(useTime <= 0) {
+			return alert('请好好玩游戏！');
+		}
+		if(money > 5) {
+			return alert('红包金额异常！');
+		}
+		$.post('http://192.168.31.152:8360/packer/index/add', {phone: phone, useTime: useTime, money: money}, function(json) {
+			// 
+			alert('提交成功！');
+			$phone.val('');
+			$gameOverDialog.hide();
+			$startDetail.show();
+			$gameDetail.hide();
+		});
 	});
 
-	// $(document).on('touchstart', function(event) {
-	// 	event.preventDefault();
-	// });
-	// document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 });
 </script>
 </body>

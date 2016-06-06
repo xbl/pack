@@ -6,6 +6,8 @@
 	    count: 0,
 	    timer: null,
 	    packCount: 5,
+	    startTime: 0,
+	    useTime: 0,
 	    start: function(properties) {
 	    	var stage = this.getStage();
 	    	var $winWidth = stage.width,
@@ -15,10 +17,15 @@
 			
 			var $liArr = $('.light-box li'),
 				$packCount = $('#pack-count');
+			// 初始化红包数
 			$packCount.text(0);
+			// 初始化下面图标点亮状态
+			$liArr.removeClass('active');
+
 			var _this = this;
+			_this.startTime = performance.now();
 			var createPack = function() {
-				[1, 1,1,1].forEach(function() {
+				[1, 1].forEach(function() {
 					_this.makeBird($liArr, slogan);
 				});
 			};
@@ -35,11 +42,15 @@
 	    	var _this = this;
 	    	var bird = new Hilo.Bitmap({
 				image: 'images/zongzi.png',
-				rect: [0, 0, 55, 56]
+				rect: [0, 0, 109, 113]
 			});
+
+	    	bird.width = 70;
+	    	bird.height = 73;
+
 			// 随机
 			if(~~(Math.random() * 10) % 5 == 0) {
-				bird.drawable.rect = [0, 56, 55, 56];
+				bird.drawable.rect = [0, 113, 109, 113];
 				bird.isIcon = true;
 				if(~~(Math.random() * 10) % 2 == 0) {
 					// bird.drawable.rect = [0, 56, 55, 56];
@@ -56,7 +67,7 @@
 			bird.y = top;
 			// 点击
 			bird.on(Hilo.event.POINTER_START, function(e) {
-				bird.drawable.rect = [0, 114, 55, 56];
+				bird.drawable.rect = [0, 226, 109, 113];
 
 				if(bird.isIcon) {
 					setTimeout(function() {
@@ -83,19 +94,15 @@
 							$target.addClass('active');
 
 							if(_this.count == 8) {
-								clearInterval(_this.timer);
-								_this.removeAllChildren();
-								// 清零
-								_this.count = 0;
-								// 
-								$(document).off('touchstart');
-								$('.game-over-dialog').show();
+								_this.onGameOver();
 							}
 						}});
 					}
 				}
 				else if(bird.isPack && _this.packCount > 0) {
-					bird.setImage( 'images/pack.png', [0, 0, 29, 35]);
+					bird.setImage( 'images/pack.png', [0, 0, 62, 71]);
+					bird.width = 31;
+	    			bird.height = 35;
 					_this.packCount--;
 					var $packCount = $('#pack-count');
 					$packCount.text(~~($packCount.text()) + 1);
@@ -106,9 +113,48 @@
 					}, 300);
 				}
 			});
-			// 动画结束
-			var teen = Hilo.Tween.to(bird, { x: (right - Math.random() * $winWidth), y: $winHeight + 20 }, { duration: 4000, onComplete: function() {
+			// 飘动动画结束
+			var teen = Hilo.Tween.to(bird, { y: $winHeight + 20 }, { duration: 4000, onComplete: function() {
 				_this.removeChild(bird);
 			}});
+			// var teen = Hilo.Tween.to(bird, { x: (right - Math.random() * $winWidth), y: $winHeight + 20 }, { duration: 4000, onComplete: function() {
+			// 	_this.removeChild(bird);
+			// }});
+	    },
+	    onGameOver: function() {
+	    	var _this = this;
+	    	var useTime = ~~((performance.now() - _this.startTime) / 1000);
+	    	_this.useTime = useTime;
+	    	// 游戏结束
+			clearInterval(_this.timer);
+			_this.removeAllChildren();
+			// 清零
+			_this.count = 0;
+			// 
+			$(document).off('touchstart');
+	    	$.getJSON('http://192.168.31.152:8360/packer/index/rank', {useTime: useTime}, function(json) {
+	    		if(json.errno != 0)
+	    			return alert(json.errmsg);
+	    		// 
+	    		$('#rank-number').text(json.data);
+	    		if(json.data > 5) {
+	    			$('#then1').hide();
+	    			$('#then5').show();
+	    		} else {
+	    			var text = '';
+	    			// 显示花费时间
+	    			var second = ~~(useTime % 60);
+	    			var minute = (useTime - second) / 60;
+	    			minute && (text += minute + '分');
+	    			second && (text += second + '秒');
+	    			$('#useTime').text(text);
+	    			$('#then1').show();
+	    			$('#then5').hide();
+	    		}
+				$('.game-over-dialog').show();
+				// $('.big-car').css('right', 0);
+				
+	    	});
+	    	
 	    }
 	});
