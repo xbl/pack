@@ -132,7 +132,7 @@
 			_this.count = 0;
 			// 
 			$(document).off('touchstart');
-	    	$.getJSON('http://192.168.31.152:8360/packer/index/rank', {useTime: useTime}, function(json) {
+	    	$.getJSON(window.baseUrl + '/packer/index/rank', {useTime: useTime}, function(json) {
 	    		if(json.errno != 0)
 	    			return alert(json.errmsg);
 	    		// 
@@ -152,8 +152,6 @@
 	    			$('#then5').hide();
 	    		}
 				$('.game-over-dialog').show();
-				// $('.big-car').css('right', 0);
-				
 	    	});
 	    	
 	    }

@@ -188,7 +188,7 @@ $(function() {
 		if(money > 5) {
 			return alert('红包金额异常！');
 		}
-		$.post('http://192.168.31.152:8360/packer/index/add', {phone: phone, useTime: useTime, money: money}, function(json) {
+		$.post(window.baseUrl + '/packer/index/add', {phone: phone, useTime: useTime, money: money}, function(json) {
 			// 
 			alert('提交成功！');
 			$phone.val('');
@@ -198,6 +198,7 @@ $(function() {
 		});
 	});
 
+	window.baseUrl = 'http://192.168.31.152:8360';
 });
 </script>
 </body>
