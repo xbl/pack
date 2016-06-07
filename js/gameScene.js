@@ -124,9 +124,9 @@
 					else if(~~(Math.random() * 10) % 3 == 0) {
 						tempMoney = 0.2;
 					}
-					else if(~~(Math.random() * 10) % 7 == 0) {
-						tempMoney = 0.5;
-					}
+					// else if(~~(Math.random() * 10) % 7 == 0) {
+					// 	tempMoney = 0.5;
+					// }
 					_this.packCount -= tempMoney;
 					$packCount.text((Number($packCount.text()) + tempMoney).toFixed(1));
 				}
