@@ -20,7 +20,7 @@ a{ text-decoration: none; }
 .start-view .rule-box p{ -webkit-transform: scale(0.8); white-space: nowrap; -webkit-transform-origin: left; }
 .start-view .big-zongzi{ background: url('../images/big-zongzi.png') no-repeat; width: 220px; margin: 0 auto; height: 210px; background-size: 100%; margin-top: 47px; }
 .start-view .bottom-bg{ background: url('../images/bottom-bg.png') repeat-x; height: 32px; position: absolute; left: 0; width: 100%; bottom: 0; background-size: auto 100%; }
-/* (min-width: 600px) and*/
+/* iphone4 、5 and */
 @media screen and (min-width: 340px) and (max-width: 375px) {
 	.start-view .big-zongzi{ width: 320px; }
 }

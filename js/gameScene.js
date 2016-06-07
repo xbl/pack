@@ -53,15 +53,15 @@
 				bird.drawable.rect = [0, 113, 109, 113];
 				bird.isIcon = true;
 				if(~~(Math.random() * 10) % 2 == 0) {
-					// bird.drawable.rect = [0, 56, 55, 56];
 					bird.isPack = true;
 					bird.isIcon = false;
 				}
 			}
 
 			_this.addChild(bird);
-			
-			var right = ~~( Math.random() * $winWidth - Math.random() * 30)
+			// 随机位置
+			// var right = ~~( Math.random() * $winWidth - Math.random() * 30)
+			var right = ~~( Math.random() * ($winWidth - bird.width));
 			var top = ~~( Math.random() * 30 - Math.random() * 200);
 			bird.x = right;
 			bird.y = top;
@@ -114,7 +114,7 @@
 				}
 			});
 			// 飘动动画结束
-			var teen = Hilo.Tween.to(bird, { y: $winHeight + 20 }, { duration: 4000, onComplete: function() {
+			var teen = Hilo.Tween.to(bird, { y: $winHeight + 20 }, { duration: 3000, onComplete: function() {
 				_this.removeChild(bird);
 			}});
 			// var teen = Hilo.Tween.to(bird, { x: (right - Math.random() * $winWidth), y: $winHeight + 20 }, { duration: 4000, onComplete: function() {
