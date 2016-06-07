@@ -84,3 +84,6 @@ a{ text-decoration: none; }
 .game-over-dialog .game-over-box h3{ font-size: 28px; text-align: center; color: #fff; margin: 15px auto 10px; text-shadow: 2px 0 0 #3a230a, -2px 0 0 #3a230a, 0 2px 0 #3a230a, 0 -2px 0 #3a230a, 1px 1px #3a230a, -1px -1px 0 #3a230a, 1px -1px 0 #3a230a, -1px 1px 0 #3a230a;}
 .game-over-dialog .game-over-box h3 span{ font-size: 45px; margin: 0 5px; }
 .game-over-dialog .game-over-box .game-over-tip{ background: #0e2431; border: #4084ab solid 1px; /*width: 185px; height: 54px;*/ width: 226px; height: 60px; margin: 0 auto; color: #fff; text-align: center; line-height: 22px; box-sizing: border-box; padding-top: 5px; }
+/* 分享朋友圈  */
+.share-dialog{ background: rgba(0, 0, 0, 0.67) url('../images/iconfont-arrow.png') no-repeat right 10px; background-size: 100px; position: absolute; left: 0; top: 0; height: 100%; width: 100%; z-index: 9; display: none; }
+.share-dialog p{ color: #fff; font-size: 14px; text-align: center; margin-top: 100px; }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="format-detection" content="telephone=no">
-<title></title>
+<title>汉腾汽车、粽享端午</title>
 <link rel="stylesheet" type="text/css" href="css/game.css">
 </head>
 
@@ -96,6 +96,10 @@
 		</div>
 	</div>
 </div>
+<!-- 分享朋友圈 -->
+<div class="share-dialog">
+	<p>请点击右上角分享到朋友圈</p>
+</div>
 
 <script type="text/javascript" src="js/hilo-standalone.min.js"></script>
 <script type="text/javascript" src="js/zepto.min.js" ></script>
@@ -114,7 +118,9 @@ $(function() {
 		$playAgain = $('.play-again'),
 		$gameOverDialog = $('.game-over-dialog'),
 		$submit = $('#submit'),
-		$phone = $('#phone');
+		$phone = $('#phone'),
+		$shareDialog = $('.share-dialog'),
+		$shareBtn = $('.share-btn');
 
 	var stage = new Hilo.Stage({
 		renderType: 'canvas',
@@ -146,7 +152,10 @@ $(function() {
 		{id:'zongzi', size: 2, src:'images/zongzi.png'},
 		{id:'bigCar', size: 248, src:'images/big-car.png'},
 		{id:'bigCarLight', size: 479, src:'images/big-car-light.png'},
-		{id:'ruleDialogTitle', size: 10, src:'./images/rule-dialog-title.png'},
+		{id:'ruleDialogTitle', size: 10, src:'images/rule-dialog-title.png'},
+		{id:'ruleDialogBg', size: 10, src:'images/rule-dialog-bg.png'},
+		{id:'bottomBg', size: 10, src:'images/bottom-bg.png'},
+		{id:'closeBtn', size: 10, src:'images/close.png'},
 	]);
 	queue.on('load', function(e) {
 		//console.log('load:', e.detail);
@@ -203,8 +212,17 @@ $(function() {
 			$gameDetail.hide();
 		});
 	});
+	// 分享朋友圈
+	$shareBtn.on('click', function() {
+		$shareDialog.show();
+	});
+	// 关闭分享朋友圈弹出层
+	$shareDialog.on('click', function() {
+		$shareDialog.hide();
+	});
 
-	window.baseUrl = 'http://192.168.31.152:8360';
+	// window.baseUrl = 'http://192.168.31.152:8360';
+	window.baseUrl = '';
 });
 </script>
 </body>
