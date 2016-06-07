@@ -4,7 +4,8 @@
 	        GameScene.superclass.constructor.call(this, properties);
 	    },
 	    count: 0,
-	    timer: null,
+	    createBirdTimer: null,
+	   	createPackTimer: null,
 	    packCount: 5,
 	    startTime: 0,
 	    useTime: 0,
@@ -14,7 +15,7 @@
 	    		$winHeight = stage.height;
 
 			var slogan = ['汉', '腾', '汽', '车', '粽', '享', '端', '午'];
-			
+
 			var $liArr = $('.light-box li'),
 				$packCount = $('#pack-count');
 			// 初始化红包数
@@ -30,12 +31,23 @@
 				});
 			};
 			createPack();
-			this.timer = setInterval(createPack, 1000);
+			this.createBirdTimer = setInterval(createPack, 1000);
+			// 6秒钟创建带字的红包
+			this.createPackTimer = setInterval(function() {
+
+				_this.makeBird($liArr, slogan, false, true);
+				[1,2,3].forEach(function() {
+					setTimeout(function() {
+						_this.makeBird($liArr, slogan, true, false);
+					}, 200);
+				});
+			}, 6000);
+
 			$(document).on('touchstart', function(event) {
 				event.preventDefault();
 			});
 	    },
-	    makeBird: function($liArr, slogan) {
+	    makeBird: function($liArr, slogan, isPack, isIcon) {
 	    	var stage = this.getStage();
 	    	var $winWidth = stage.width,
 	    		$winHeight = stage.height;
@@ -47,16 +59,16 @@
 
 	    	bird.width = 65;
 	    	bird.height = 67;
-
-			// 随机
-			if(~~(Math.random() * 10) % 5 == 0) {
-				bird.drawable.rect = [0, 113, 109, 113];
-				bird.isIcon = true;
-				if(~~(Math.random() * 10) % 2 == 0) {
-					bird.isPack = true;
-					bird.isIcon = false;
-				}
-			}
+	    	// 如果是红包
+	    	if(isPack) {
+	    		bird.drawable.rect = [0, 113, 109, 113];
+	    		bird.isPack = true;
+	    	}
+	    	// 点亮图标
+	    	else if(isIcon) {
+	    		bird.drawable.rect = [0, 113, 109, 113];
+	    		bird.isIcon = true;
+	    	}
 
 			_this.addChild(bird);
 			// 随机位置
@@ -68,7 +80,7 @@
 			// 点击
 			bird.on(Hilo.event.POINTER_START, function(e) {
 				bird.drawable.rect = [0, 226, 109, 113];
-
+				console.log(bird);
 				if(bird.isIcon) {
 					setTimeout(function() {
 						_this.removeChild(bird);
@@ -103,9 +115,20 @@
 					bird.setImage( 'images/pack.png', [0, 0, 62, 71]);
 					bird.width = 31;
 	    			bird.height = 35;
-					_this.packCount--;
 					var $packCount = $('#pack-count');
-					$packCount.text(~~($packCount.text()) + 1);
+					// 随机钱数
+					var tempMoney = 0;
+					if(~~(Math.random() * 10) % 2 == 0) {
+						tempMoney = 0.1;
+					}
+					else if(~~(Math.random() * 10) % 3 == 0) {
+						tempMoney = 0.2;
+					}
+					else if(~~(Math.random() * 10) % 7 == 0) {
+						tempMoney = 0.5;
+					}
+					_this.packCount -= tempMoney;
+					$packCount.text((Number($packCount.text()) + tempMoney).toFixed(1));
 				}
 				else {
 					setTimeout(function() {
@@ -126,7 +149,8 @@
 	    	var useTime = ~~((performance.now() - _this.startTime) / 1000);
 	    	_this.useTime = useTime;
 	    	// 游戏结束
-			clearInterval(_this.timer);
+			clearInterval(_this.createBirdTimer);
+			clearInterval(_this.createPackTimer);
 			_this.removeAllChildren();
 			// 清零
 			_this.count = 0;
