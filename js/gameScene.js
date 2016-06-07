@@ -45,8 +45,8 @@
 				rect: [0, 0, 109, 113]
 			});
 
-	    	bird.width = 70;
-	    	bird.height = 73;
+	    	bird.width = 65;
+	    	bird.height = 67;
 
 			// 随机
 			if(~~(Math.random() * 10) % 5 == 0) {

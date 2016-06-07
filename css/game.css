@@ -17,7 +17,8 @@ a{ text-decoration: none; }
 .start-view .rule-box .button-group{ padding: 10px 0 5px; overflow: hidden; text-align: center; line-height: 34px; }
 .start-view .rule-box .start-btn{ background: url('../images/start-btn.png') no-repeat; background-size: 100%; width: 100px; display: inline-block; height: 34px; margin-right: 23px; vertical-align: middle; }
 .start-view .rule-box .rule-btn{ background: url('../images/rule-btn.png') no-repeat; background-size: 100%; width: 80px; height: 28px; display: inline-block; vertical-align: middle; }
-.start-view .rule-box p{ -webkit-transform: scale(0.8); white-space: nowrap; -webkit-transform-origin: left; }
+.start-view .rule-box .active-time{ text-align: center; }
+.start-view .rule-box .active-time span{ -webkit-transform: scale(0.8); white-space: nowrap; -webkit-transform-origin: left; display: inline-block; width: 296px; font-weight: 700; }
 .start-view .big-zongzi{ background: url('../images/big-zongzi.png') no-repeat; width: 220px; margin: 0 auto; height: 210px; background-size: 100%; margin-top: 47px; }
 .start-view .bottom-bg{ background: url('../images/bottom-bg.png') repeat-x; height: 32px; position: absolute; left: 0; width: 100%; bottom: 0; background-size: auto 100%; }
 /* iphone4 、5 and */
@@ -47,16 +48,21 @@ a{ text-decoration: none; }
 
 /* 规则弹出层 */
 .rule-dialog, .game-over-dialog{ position: absolute; top: 0; height: 100%; width: 100%; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.75); display: none; z-index: 5; }
-.rule-dialog .rule-dialog-box{ background: url('../images/rule-dialog-bg.png') no-repeat; width: 290px; height: 240px; position: relative; top: 30%; margin: 0 auto; }
-.rule-dialog .rule-dialog-box .title{ background: url('../images/rule-dialog-title.png') no-repeat; width: 115px; height: 39px; margin: 0 auto; position: relative; top: -20px; display: block; }
-.rule-dialog .rule-dialog-box li{ margin-bottom: 10px; margin-left: 10px; }
-.rule-dialog .rule-dialog-box li i{ color: #fff; font-style: normal; }
+.rule-dialog .rule-dialog-box{ background: url('../images/rule-dialog-bg.png') no-repeat; width: 290px; height: 240px; position: relative; top: 30%; margin: 0 auto; color: #fff; }
+.rule-dialog .rule-dialog-box .title{ background: url('../images/rule-dialog-title.png') no-repeat; background-size: 100%; width: 115px; height: 39px; margin: 0 auto; position: relative; top: -20px; display: block; }
+.rule-dialog .rule-dialog-box li{ margin-bottom: 10px; margin-left: 10px; line-height: 19px; }
+.rule-dialog .rule-dialog-box li i{ color: #ffd200; font-weight: 700; font-style: normal; }
 .rule-dialog .rule-dialog-box .close{ background: url('../images/close.png') no-repeat; width: 26px; height: 29px; display: inline-block; position: absolute; right: -8px; top: -8px; }
 
 /* 大车 */
 @-webkit-keyframes show-car {
 	0% { }
-	100% { right: 0; }
+	/*100% { right: 0; }*/
+	100% { -webkit-transform: translateX(0); }
+}
+@-webkit-keyframes show-light {
+	0% { }
+	100% { opacity: 1; }
 }
 
 @-webkit-keyframes show-dialog {
@@ -67,8 +73,9 @@ a{ text-decoration: none; }
 /* 游戏结算弹出层 */
 .game-over-dialog{ overflow: hidden; }
 
-.game-over-dialog .big-car{ background: url('../images/big-car.png') no-repeat; background-size: 100%; position: absolute; right: -188px; top: 158px; width: 188px; height: 195px; -webkit-transition: all 1s ease-in-out; -webkit-animation: 1.5s ease-in-out 0s 1 alternate forwards 'show-car'; }
-.game-over-dialog .game-over-box{ background: rgba(48, 74, 100, 0.89); border: #5e86a4 solid 1px; border-radius: 5px; width: 290px; height: 290px; position: relative; top: 20%; margin: 0 auto; opacity: 0; -webkit-animation: 1s ease-in-out 2s 1 alternate forwards 'show-dialog' }
+.game-over-dialog .big-car{ background: url('../images/big-car.png') no-repeat; background-size: 100%; position: absolute; right: 0; -webkit-transform: translateX(320px); top: 158px; width: 100%; height: 100%; -webkit-transition: all 1s ease-in-out; -webkit-animation: 1.5s ease-in-out 0s 1 alternate forwards 'show-car'; }
+.game-over-dialog .big-car .light{ background: url('../images/big-car-light.png') no-repeat; background-size: 100%; position: absolute; width: 100%; height: 100%; opacity: 0; -webkit-animation: 0.2s ease 1.3s 1 alternate forwards 'show-light'; }
+.game-over-dialog .game-over-box{ background: rgba(48, 74, 100, 0.89); border: #5e86a4 solid 1px; border-radius: 5px; width: 290px; height: 290px; position: relative; top: 20%; margin: 0 auto; opacity: 0; -webkit-animation: 1s ease-in-out 2.5s 1 alternate forwards 'show-dialog' }
 .game-over-dialog .game-over-box .title{ background: url('../images/rank-title.png') no-repeat; background-size: 100%; width: 115px; display: block; height: 40px; margin: 0 auto; position: relative; top: -14px; }
 .game-over-dialog .game-over-box .btn-group{ position: absolute; bottom: 60px; left: 0; width: 100%; text-align: center; }
 .game-over-dialog .game-over-box .play-again,.game-over-dialog .game-over-box .share-btn{ background: url('../images/game-over-btn-bg.png') no-repeat; width: 82px; height: 34px; line-height: 34px; color: #fff; display: inline-block; text-shadow: 2px 0 0 #3a230a, -2px 0 0 #3a230a, 0 2px 0 #3a230a, 0 -2px 0 #3a230a, 1px 1px #3a230a, -1px -1px 0 #3a230a, 1px -1px 0 #3a230a, -1px 1px 0 #3a230a; margin: 0 5px; }

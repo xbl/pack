@@ -27,7 +27,9 @@
 				<a href="javascript:void(0)" class="start-btn"></a>
 				<a href="javascript:void(0)" class="rule-btn"></a>
 			</div>
-			<p>活动时间：6月9日-6月12日每天中午12点准时开场</p>
+			<div class="active-time">
+				<span>活动时间：6月9日-6月12日每天中午12点准时开场</span>
+			</div>
 		</div>
 	</div>
 	<div class="game-detail">
@@ -68,7 +70,9 @@
 </div>
 
 <div class="game-over-dialog">
-	<div class="big-car"></div>
+	<div class="big-car">
+		<div class="light"></div>
+	</div>
 	<div class="game-over-box">
 		<span class="title"></span>
 		<h3>
@@ -140,7 +144,9 @@ $(function() {
 		{id:'rankTitle', size: 2, src:'images/rank-title.png'},
 		{id:'playAgain', size: 2, src:'images/play-again.png'},
 		{id:'zongzi', size: 2, src:'images/zongzi.png'},
-		{id:'bigCar', size: 148, src:'./images/big-car.png'},
+		{id:'bigCar', size: 248, src:'images/big-car.png'},
+		{id:'bigCarLight', size: 479, src:'images/big-car-light.png'},
+		{id:'ruleDialogTitle', size: 10, src:'./images/rule-dialog-title.png'},
 	]);
 	queue.on('load', function(e) {
 		//console.log('load:', e.detail);
@@ -179,7 +185,7 @@ $(function() {
 		var phone = $phone.val(),
 			useTime = gameScene.useTime,
 			money = 0.5;
-		if(phone.length > 11) {
+		if(phone.length != 11) {
 			return alert('请输入正确手机号！');
 		}
 		if(useTime <= 0) {
