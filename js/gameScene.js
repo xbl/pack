@@ -9,6 +9,7 @@
 	    packCount: 5,
 	    startTime: 0,
 	    useTime: 0,
+	    money: 0,
 	    start: function(properties) {
 	    	var stage = this.getStage();
 	    	var $winWidth = stage.width,
@@ -18,6 +19,7 @@
 
 			var $liArr = $('.light-box li'),
 				$packCount = $('#pack-count');
+			this.money = 0;
 			// 初始化红包数
 			$packCount.text(0);
 			// 初始化下面图标点亮状态
@@ -34,20 +36,22 @@
 			this.createBirdTimer = setInterval(createPack, 1000);
 			// 6秒钟创建带字的红包
 			this.createPackTimer = setInterval(function() {
-
 				_this.makeBird($liArr, slogan, false, true);
-				[1,2,3].forEach(function() {
+				[1,2,3].forEach(function(a, i) {
 					setTimeout(function() {
-						_this.makeBird($liArr, slogan, true, false);
-					}, 200);
+						_this.makeBird($liArr, slogan, false, false, true);
+					}, i * 1000);
 				});
+				setTimeout(function() {
+					_this.makeBird($liArr, slogan, true, false);
+				}, 1000);
 			}, 6000);
 
 			$(document).on('touchstart', function(event) {
 				event.preventDefault();
 			});
 	    },
-	    makeBird: function($liArr, slogan, isPack, isIcon) {
+	    makeBird: function($liArr, slogan, isPack, isIcon, isNull) {
 	    	var stage = this.getStage();
 	    	var $winWidth = stage.width,
 	    		$winHeight = stage.height;
@@ -68,6 +72,9 @@
 	    	else if(isIcon) {
 	    		bird.drawable.rect = [0, 113, 109, 113];
 	    		bird.isIcon = true;
+	    	}
+	    	else if(isNull) {
+	    		bird.drawable.rect = [0, 113, 109, 113];
 	    	}
 
 			_this.addChild(bird);
@@ -128,6 +135,7 @@
 					// 	tempMoney = 0.5;
 					// }
 					_this.packCount -= tempMoney;
+					_this.money += tempMoney;
 					$packCount.text((Number($packCount.text()) + tempMoney).toFixed(1));
 				}
 				else {
@@ -161,20 +169,14 @@
 	    			return alert(json.errmsg);
 	    		// 
 	    		$('#rank-number').text(json.data);
-	    		if(json.data > 5) {
-	    			$('#then1').hide();
-	    			$('#then5').show();
-	    		} else {
-	    			var text = '';
-	    			// 显示花费时间
-	    			var second = ~~(useTime % 60);
-	    			var minute = (useTime - second) / 60;
-	    			minute && (text += minute + '分');
-	    			second && (text += second + '秒');
-	    			$('#useTime').text(text);
-	    			$('#then1').show();
-	    			$('#then5').hide();
-	    		}
+    			var text = '';
+    			// 显示花费时间
+    			var second = ~~(useTime % 60);
+    			var minute = (useTime - second) / 60;
+    			minute && (text += minute + '分');
+    			second && (text += second + '秒');
+    			$('#useTime').text(text);
+    			// $('#then1').show();
 				$('.game-over-dialog').show();
 	    	});
 	    	

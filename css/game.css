@@ -13,7 +13,7 @@ a{ text-decoration: none; }
 /* 开始场景 */
 .start-view{ display: none; text-align: center; background: url('../images/game-bg.jpg') no-repeat center; background-size: 100%; }
 .start-view .box{ position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
-.start-view .rule-box{ background: rgba(48, 74, 100, 0.89); border: #5e86a4 solid 1px; width: 258px; height: 165px; border-radius: 5px; position: absolute; bottom: 35px; left: 50%; margin-left: -129px; z-index: 1; box-sizing: border-box; padding: 10px; text-align: left; font-size: 12px; color: #fff; line-height: 20px;}
+.start-view .rule-box{ background: rgba(48, 74, 100, 0.89); border: #5e86a4 solid 1px; width: 258px; height: 162px; border-radius: 5px; position: absolute; bottom: 35px; left: 50%; margin-left: -129px; z-index: 1; box-sizing: border-box; padding: 10px; text-align: left; font-size: 12px; color: #fff; line-height: 20px;}
 .start-view .rule-box .button-group{ padding: 10px 0 5px; overflow: hidden; text-align: center; line-height: 34px; }
 .start-view .rule-box .start-btn{ background: url('../images/start-btn.png') no-repeat; background-size: 100%; width: 100px; display: inline-block; height: 34px; margin-right: 23px; vertical-align: middle; }
 .start-view .rule-box .rule-btn{ background: url('../images/rule-btn.png') no-repeat; background-size: 100%; width: 80px; height: 28px; display: inline-block; vertical-align: middle; }
@@ -50,6 +50,7 @@ a{ text-decoration: none; }
 .rule-dialog, .game-over-dialog{ position: absolute; top: 0; height: 100%; width: 100%; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.75); display: none; z-index: 5; }
 .rule-dialog .rule-dialog-box{ background: url('../images/rule-dialog-bg.png') no-repeat; width: 290px; height: 240px; position: relative; top: 30%; margin: 0 auto; color: #fff; }
 .rule-dialog .rule-dialog-box .title{ background: url('../images/rule-dialog-title.png') no-repeat; background-size: 100%; width: 115px; height: 39px; margin: 0 auto; position: relative; top: -20px; display: block; }
+.rule-dialog .rule-dialog-box ul{ margin-top: -10px; }
 .rule-dialog .rule-dialog-box li{ margin-bottom: 10px; margin-left: 10px; line-height: 19px; }
 .rule-dialog .rule-dialog-box li i{ color: #ffd200; font-weight: 700; font-style: normal; }
 .rule-dialog .rule-dialog-box .close{ background: url('../images/close.png') no-repeat; width: 26px; height: 29px; display: inline-block; position: absolute; right: -8px; top: -8px; }
@@ -71,11 +72,11 @@ a{ text-decoration: none; }
 }
 
 /* 游戏结算弹出层 */
-.game-over-dialog{ overflow: hidden; }
+.game-over-dialog{ overflow: hidden; background: rgba(0,0,0,0.85); }
 
 .game-over-dialog .big-car{ background: url('../images/big-car.png') no-repeat; background-size: 100%; position: absolute; right: 0; -webkit-transform: translateX(320px); top: 158px; width: 100%; height: 100%; -webkit-transition: all 1s ease-in-out; -webkit-animation: 1.5s ease-in-out 0s 1 alternate forwards 'show-car'; }
 .game-over-dialog .big-car .light{ background: url('../images/big-car-light.png') no-repeat; background-size: 100%; position: absolute; width: 100%; height: 100%; opacity: 0; -webkit-animation: 0.2s ease 1.3s 1 alternate forwards 'show-light'; }
-.game-over-dialog .game-over-box{ background: rgba(48, 74, 100, 0.89); border: #5e86a4 solid 1px; border-radius: 5px; width: 290px; height: 290px; position: relative; top: 20%; margin: 0 auto; opacity: 0; -webkit-animation: 1s ease-in-out 2.5s 1 alternate forwards 'show-dialog' }
+.game-over-dialog .game-over-box{ background: rgba(48, 74, 100, 0.89); border: #5e86a4 solid 1px; border-radius: 5px; width: 290px; height: 340px; position: relative; top: 20%; margin: 0 auto; opacity: 0; -webkit-animation: 1s ease-in-out 2.5s 1 alternate forwards 'show-dialog' }
 .game-over-dialog .game-over-box .title{ background: url('../images/rank-title.png') no-repeat; background-size: 100%; width: 115px; display: block; height: 40px; margin: 0 auto; position: relative; top: -14px; }
 .game-over-dialog .game-over-box .btn-group{ position: absolute; bottom: 60px; left: 0; width: 100%; text-align: center; }
 .game-over-dialog .game-over-box .play-again,.game-over-dialog .game-over-box .share-btn{ background: url('../images/game-over-btn-bg.png') no-repeat; width: 82px; height: 34px; line-height: 34px; color: #fff; display: inline-block; text-shadow: 2px 0 0 #3a230a, -2px 0 0 #3a230a, 0 2px 0 #3a230a, 0 -2px 0 #3a230a, 1px 1px #3a230a, -1px -1px 0 #3a230a, 1px -1px 0 #3a230a, -1px 1px 0 #3a230a; margin: 0 5px; }
@@ -83,7 +84,8 @@ a{ text-decoration: none; }
 .game-over-dialog .game-over-box .form{ position: absolute; left: 0; bottom: 20px; width: 100%; text-align: center; }
 .game-over-dialog .game-over-box h3{ font-size: 28px; text-align: center; color: #fff; margin: 15px auto 10px; text-shadow: 2px 0 0 #3a230a, -2px 0 0 #3a230a, 0 2px 0 #3a230a, 0 -2px 0 #3a230a, 1px 1px #3a230a, -1px -1px 0 #3a230a, 1px -1px 0 #3a230a, -1px 1px 0 #3a230a;}
 .game-over-dialog .game-over-box h3 span{ font-size: 45px; margin: 0 5px; }
-.game-over-dialog .game-over-box .game-over-tip{ background: #0e2431; border: #4084ab solid 1px; /*width: 185px; height: 54px;*/ width: 226px; height: 60px; margin: 0 auto; color: #fff; text-align: center; line-height: 22px; box-sizing: border-box; padding-top: 5px; }
+.game-over-dialog .game-over-box .game-over-tip{ background: #0e2431; border: #4084ab solid 1px; /*width: 185px; height: 54px;*/ width: 226px; height: 100px; margin: 0 auto; color: #ffd200; text-align: center; line-height: 22px; box-sizing: border-box; padding-top: 5px; }
+.game-over-dialog .game-over-box .game-over-tip .small{ -webkit-transform: scale(0.7); display: block; color: #fff; }
 /* 分享朋友圈  */
 .share-dialog{ background: rgba(0, 0, 0, 0.67) url('../images/iconfont-arrow.png') no-repeat right 10px; background-size: 100px; position: absolute; left: 0; top: 0; height: 100%; width: 100%; z-index: 9; display: none; }
 .share-dialog p{ color: #fff; font-size: 14px; text-align: center; margin-top: 100px; }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 <meta name="format-detection" content="telephone=no">
-<title>汉腾汽车、粽享端午</title>
+<title>汉腾汽车·粽享端午</title>
 <link rel="stylesheet" type="text/css" href="css/game.css">
 </head>
 
@@ -20,15 +20,13 @@
 		<a class="logo" href="javascript:void(0)"></a>
 		<div class="big-zongzi"></div>
 		<div class="rule-box">
-			这是一场眼力与速度的考验，你敢接受这份挑战吗？
-	如果你的眼力够准，速度够快，200元的京东卡就能
-	轻松拿到手！“粽’享端午，赶紧点粽子来吧！
+			这是一场眼力与速度的考验，只要你眼力够准，速度够快，点击带有“汉腾汽车”字体的粽子，即有机会天天拿红包，甚至还有京东卡可拿哦！赶紧来点粽子吧！
 			<div class="button-group">
 				<a href="javascript:void(0)" class="start-btn"></a>
 				<a href="javascript:void(0)" class="rule-btn"></a>
 			</div>
 			<div class="active-time">
-				<span>活动时间：6月9日-6月12日每天中午12点准时开场</span>
+				<span>活动时间：6月9日-12日每天中午12点开抢！</span>
 			</div>
 		</div>
 	</div>
@@ -61,10 +59,11 @@
 		<a href="javascript:void(0)" class="close" id="dialog-close"></a>
 		<span class="title"></span>
 		<ul>
-			<li>1、关注汉腾汽车微信公众号，即可参与活动。</li>
-			<li>2、点击带有汉腾汽车LOGO的粽子，<i>以最短时间集齐“汉腾汽车·粽享端午”8个字，点亮下方8个车部件的5名朋友，即可每人获得200元京东卡一张！</i></li>
-			<li>3、带有汉腾汽车LOGO的粽子，分三种<i>（现金红包、空、写字）</i>，均为随机发放。</li>
-			<li>4、每人每天有<i>2次</i>的参与机会。转发一位好友或分享朋友圈，均可获得<i>1次</i>机会。</li>
+			<li>1、关注汉腾汽车微信公众号，参与游戏赢取大奖。</li>
+			<li>2、活动期间点击带有“汉腾汽车”字体的粽子，<i>以最短时间集齐“汉腾汽车·粽享端午”8个字的前5名网友，即可获得200元京东卡一张。</i></li>
+			<li>3、带有“汉腾汽车”字体的粽子分为三种：红包、字、空白，随机发放。</li>
+			<li>4、前5名的成绩是以活动期间网友最好成绩为准；而红包成绩是以每日网友参与的最后一次成绩为准。</li>
+			<li>5、奖品领取方式具体请查看微信文章。</li>
 		</ul>
 	</div>
 </div>
@@ -80,18 +79,15 @@
 		</h3>
 		<div class="game-over-tip" id="then1">
 			恭喜您完成挑战，共耗时<span id="useTime"></span>时间。<br>
-			但是不要骄傲哦，排名只是暂时的！
-		</div>
-		<div class="game-over-tip" id="then5">
-			差一点，就进前5名了！<br>
-			青年再战一局，敢不敢？
+			青年敢不敢，再来一战?<br>
+			<span class="small">(奖品领取成绩标准，请查看游戏规则或微信推送文章)</span>
 		</div>
 		<div class="btn-group">
 			<a href="javascript:void(0)" class="play-again">再战一次</a>
 			<a href="javascript:void(0)" class="share-btn">分享朋友圈</a>
 		</div>
 		<div class="form">
-			<input type="text" id="phone" placeholder="输入手机号领取奖励">
+			<input type="text" id="phone" placeholder="输入手机号领取红包">
 			<button class="submit" id="submit"></button>
 		</div>
 	</div>
@@ -193,7 +189,7 @@ $(function() {
 	$submit.on('click', function() {
 		var phone = $phone.val(),
 			useTime = gameScene.useTime,
-			money = 0.5;
+			money = gameScene.money;
 		if(phone.length != 11) {
 			return alert('请输入正确手机号！');
 		}
